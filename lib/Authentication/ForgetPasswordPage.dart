@@ -23,6 +23,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               padding: const EdgeInsets.only(
                   top: 180, bottom: 20, right: 20, left: 20),
               child: Column(

@@ -2,7 +2,7 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:snake_game_v_25/UI%20Design%20Folder/SplashScreen.dart';
+import 'package:snake_game_v_25/UI%20Page/SplashScreen.dart';
 import 'package:snake_game_v_25/firebase_options.dart';
 
 //99371F24-9978-4784-9248-2E6DFCEB4CA1
@@ -17,7 +17,7 @@ Future main() async {
         appleProvider: AppleProvider.appAttest);
   } catch (e) {
     if (kDebugMode) {
-      print('Printing From App: \n Error during Firebase initialization: $e');
+      print('\n\nPrinting From App: \n Error during Firebase initialization: $e\n\n');
     }
   }
   runApp(const MyApp());

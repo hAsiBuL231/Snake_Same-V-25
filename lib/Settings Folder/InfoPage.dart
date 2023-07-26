@@ -27,19 +27,22 @@ class _InfoPageState extends State<InfoPage>
       appBar: AppBar(
         title: const Text("About"),
       ),
-      body: const Column(
-        children: [
-          //Image(image: AssetImage('Assets/cover.png')),
-          Image(image: AssetImage('Assets/Images/image2.png')),
-          AnimatedPositioned(
-              duration: Duration(seconds: 2),
-              //top: _animation.value,
-              child: Text(
-                  "Hello!\n My name is Md Hasibul Hossain Rezvi.\n I'm studying Computer Science at Comilla University."
-                  "\n\nIt is my first App.\nThank you for trying this App.",
-                  style: TextStyle(fontSize: 25),
-                  textAlign: TextAlign.center))
-        ],
+      body: SingleChildScrollView(
+        child: const Column(
+          children: [
+            //Image(image: AssetImage('Assets/cover.png')),
+            Image(image: AssetImage('Assets/Images/image2.png')),
+            AnimatedPositioned(
+                duration: Duration(seconds: 2),
+                //top: _animation.value,
+                child: Text(
+                    "Hello!\n My name is Md Hasibul Hossain Rezvi.\n I'm studying Computer Science at Comilla University."
+                    "\n\nIt is my first App.\nThank you for trying this App.",
+                    style: TextStyle(fontSize: 25),
+                    textAlign: TextAlign.center)),
+            SizedBox(height: 50)
+          ],
+        ),
       ),
       backgroundColor: Colors.blue[100],
     );

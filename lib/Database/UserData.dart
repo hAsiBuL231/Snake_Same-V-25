@@ -14,6 +14,7 @@ class _UserDataState extends State<UserData> {
 
     // Query the collection to get all documents
     var snapshot = await users.where(FieldPath(['$userEmail'])).get();
+    //var snapshot = await users.get();
 
     // Return the list of documents
     return snapshot.docs;
@@ -50,8 +51,7 @@ class _UserDataState extends State<UserData> {
                 DataColumn(label: Text('First Login')),
               ],
               rows: snapshot.data!.map((document) {
-                Map<String, dynamic>? data =
-                    document.data() as Map<String, dynamic>?;
+                Map<String, dynamic>? data = document.data() as Map<String, dynamic>?;
                 Timestamp time = data!['joined'];
                 DateTime joined = time.toDate();
                 return DataRow(

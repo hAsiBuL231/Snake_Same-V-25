@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../Functions/Functions.dart';
+
 class ScoreHistory extends StatefulWidget {
   const ScoreHistory({super.key});
 
@@ -13,22 +15,10 @@ class _ScoreHistoryState extends State<ScoreHistory> {
   String? userEmail = FirebaseAuth.instance.currentUser!.email;
   int highestScore = 0;
 
-  timeFormat(Timestamp time) {
-    DateTime now = time.toDate();
-    String convertedTime =
-        "${now.hour.toString().padLeft(2, '0')}-${now.minute.toString().padLeft(2, '0')}";
-    String convertedDate =
-        "${now.year.toString()}/${now.month.toString().padLeft(2, '0')}/${now.day.toString().padLeft(2, '0')}";
-    String convertedDateTime = "$convertedTime  $convertedDate";
-    return convertedDateTime;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Score History'),
-      ),
+      appBar: AppBar(title: const Text('My Score History')),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('user_list')
@@ -59,45 +49,41 @@ class _ScoreHistoryState extends State<ScoreHistory> {
                   if (level == 200) level = 'Easy';
                   if (level == 150) level = 'Medium';
                   if (level == 100) level = 'Hard';
-
-                  return Row(
-                    children: [
-                      Container(
-                          margin: const EdgeInsets.all(5),
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              color: Colors.amber,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Text("$id",
-                              style: const TextStyle(fontSize: 24))),
-                      Container(
-                        margin: const EdgeInsets.all(5),
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                  return Card(
+                      color: Colors.blue,
+                      elevation: 20,
+                      margin: EdgeInsets.all(20),
+                      borderOnForeground: true,
+                      semanticContainer: true,
+                      surfaceTintColor: Colors.amber,
+                      shape: OutlineInputBorder(borderRadius: BorderRadius.zero),
+                      child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
                             children: [
-                              Text("Time: $time",
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              Text("Score: $score",
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              Text("Level: $level",
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              Text("Mode: $mode",
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              Text("System: $system",
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                            ]),
-                      ),
-                    ],
-                  );
+                              Container(
+                                  margin: const EdgeInsets.only(top: 5, bottom: 5, left: 15, right: 5),
+                                  padding: const EdgeInsets.all(10),
+                                  decoration:
+                                      BoxDecoration(color: Colors.amber, borderRadius: BorderRadius.circular(10)),
+                                  child: Text("$id", style: const TextStyle(fontSize: 24))),
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.only(top: 5, bottom: 5, left: 5, right: 20),
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      color: Colors.lightBlueAccent, borderRadius: BorderRadius.circular(20)),
+                                  child: Column(children: [
+                                    Text("Time: $time", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                    Text("Score: $score", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                    Text("Level: $level", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                    Text("Mode: $mode", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                    Text("System: $system", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                  ]),
+                                ),
+                              ),
+                            ],
+                          )));
                 },
               );
             }

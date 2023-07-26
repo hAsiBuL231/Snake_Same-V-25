@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import '../Database/GameScores.dart';
 import '../Database/globals.dart';
-import '../UI Design Folder/Functions.dart';
-import '../UI Design Folder/HomePage.dart';
+import '../FirebaseFunction/FirebaseFunction.dart';
+import '../Functions/Functions.dart';
+import '../UI Page/HomePage.dart';
 
 enum Direction { up, down, left, right }
 
@@ -56,7 +56,7 @@ class ManualPageBoxedState extends State<ManualPageBoxed> {
     setState(() {
       _shouldRunCallback = false;
     });
-    var hScore = GameScoresState().highestScore;
+    //var hScore = oldGameScoresState().highestScore;
     addScore(score);
     showDialog(
         context: context,
@@ -64,7 +64,8 @@ class ManualPageBoxedState extends State<ManualPageBoxed> {
           return AlertDialog(
               title: const Text("Game Over"),
               content: Text("Your Score is: $score\n"
-                  "Current highest score: $hScore"),
+                  //"Current highest score: $hScore"
+              ),
               actions: [
                 ElevatedButton(
                     onPressed: resetGame, child: const Text("Try Again")),
@@ -128,38 +129,40 @@ class ManualPageBoxedState extends State<ManualPageBoxed> {
                   label: Text("Score: $score",
                       style: const TextStyle(color: Colors.black, fontSize: 18)),
                   onPressed: null),
-              Container(
-                  height: 440,
-                  color: Colors.red,
-                  child: GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.all(10),
-                      itemCount: grow * gColumn,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: grow,
-                        //mainAxisSpacing: 0.5,
-                        //crossAxisSpacing: 0.5,
-                      ),
-                      itemBuilder: (contex, index) {
-                        if (snakePosition.last == index) {
-                          return Container(color: Colors.green[900]);
-                        } else if (snakePosition.first == index) {
-                          return Container(color: Colors.green[300]);
-                        } else if (snakePosition.contains(index)) {
-                          return Container(color: Colors.green);
-                        } else if (index == fruit) {
-                          return Container(
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage('Assets/Images/egg.png'),
-                                      fit: BoxFit.fill),
-                                  shape: BoxShape.rectangle,
-                                  color: Colors.white));
-                        } else {
-                          return Container(color: Colors.white);
-                        }
-                      })),
+              Expanded(
+                child: Container(
+                    height: 440,
+                    color: Colors.red,
+                    child: GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.all(10),
+                        itemCount: grow * gColumn,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: grow,
+                          //mainAxisSpacing: 0.5,
+                          //crossAxisSpacing: 0.5,
+                        ),
+                        itemBuilder: (contex, index) {
+                          if (snakePosition.last == index) {
+                            return Container(color: Colors.green[900]);
+                          } else if (snakePosition.first == index) {
+                            return Container(color: Colors.green[300]);
+                          } else if (snakePosition.contains(index)) {
+                            return Container(color: Colors.green);
+                          } else if (index == fruit) {
+                            return Container(
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage('Assets/Images/egg.png'),
+                                        fit: BoxFit.fill),
+                                    shape: BoxShape.rectangle,
+                                    color: Colors.white));
+                          } else {
+                            return Container(color: Colors.white);
+                          }
+                        })),
+              ),
               Container(
                   height: 200,
                   padding: const EdgeInsets.all(7),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../Database/UserData.dart';
@@ -6,8 +7,8 @@ import '../Database/UserProfile.dart';
 import '../Authentication/ForgetPasswordPage.dart';
 import '../Authentication/SignInPage.dart';
 import '../Authentication/SignUpPage.dart';
-import 'Functions.dart';
-import 'SnakeGamePage.dart';
+import '../Functions/Functions.dart';
+import 'WelcomePage.dart';
 
 class AllPagesClass extends StatefulWidget {
   const AllPagesClass({Key? key}) : super(key: key);
@@ -38,23 +39,36 @@ class _AllPagesClassState extends State<AllPagesClass> {
           elevation: 80,
           foregroundColor: Colors.amber,
           shadowColor: Colors.black,
-          leading: IconButton(
-              onPressed: () => nextPage(SnakeGamePage(), context),
-              icon: const Icon(Icons.cabin)),
+          leading: IconButton(onPressed: () => nextPage(WelcomePage(), context), icon: const Icon(Icons.cabin)),
           backgroundColor: Colors.blue,
           shape: const RoundedRectangleBorder(
               //borderRadius: BorderRadiusDirectional.circular(20)),
-              borderRadius: BorderRadius.horizontal(
-                  left: Radius.circular(25), right: Radius.circular(25))),
+              borderRadius: BorderRadius.horizontal(left: Radius.circular(25), right: Radius.circular(25))),
           title: const Text('All Pages'),
           actions: const [Icon(Icons.ac_unit)],
-          bottom: const PreferredSize(
-              preferredSize: Size(20, 20), child: Text('Appbar'))),
+          bottom: const PreferredSize(preferredSize: Size(20, 20), child: Text('Appbar'))),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
         child: Column(
           children: [
+            ElevatedButton(
+              onPressed: () async {
+                var doc_ref = FirebaseFirestore.instance
+                    .collection('user_list')
+                    .doc('hossainhasibul2@gmail.com')
+                    .collection('inbox')
+                    .doc('test@gmail.com')
+                    .collection('messages')
+                    .orderBy("time", descending: true)
+                    .limit(1);
+                var docSnap = await doc_ref.get();
+                var doc_id2 = docSnap.docs[0].id;
+                print("\n\n $doc_id2 \n\n");
+                print('object');
+              },
+              child: const Text("ElevatedButton : Page"),
+            ),
             ElevatedButton(
               onPressed: () => nextPage(const SignInPage(), context),
               child: const Text("ElevatedButton : SignInPage"),
@@ -64,19 +78,15 @@ class _AllPagesClassState extends State<AllPagesClass> {
                 child: const Text("TextButton : SignUpPage")),
             TextButton(
                 onPressed: () => nextPage(const ForgetPasswordPage(), context),
-                child: const Text('OutlineButton : ForgetPasswordPage')),
-            ElevatedButton(
+                child: const Text('TextButton : ForgetPasswordPage')),
+            FilledButton(
                 onPressed: () => nextPage(const UserForm(), context),
-                child: const Text("ElevatedButton : UserForm")),
-            TextButton(
-                onPressed: () => nextPage(UserData(), context),
-                child: const Text("FilledButton : UserData")),
-            TextButton(
+                child: const Text("FilledButton : UserForm")),
+            TextButton(onPressed: () => nextPage(UserData(), context), child: const Text("TextButton : UserData")),
+            OutlinedButton(
                 onPressed: () => nextPage(const UserProfile(), context),
-                child: const Text("FilledButton : UserProfile")),
-            IconButton(
-                onPressed: () => nextPage(SnakeGamePage(), context),
-                icon: const Icon(Icons.login)),
+                child: const Text("OutlinedButton : UserProfile")),
+            IconButton(onPressed: () => nextPage(WelcomePage(), context), icon: const Icon(Icons.login)),
             DropdownButton(
                 // Initial Value
                 value: dropdownvalue,
@@ -100,12 +110,9 @@ class _AllPagesClassState extends State<AllPagesClass> {
               CloseButton(onPressed: () => SystemNavigator.pop())
             ]),
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              FilledButton(
-                  onPressed: () => nextPage(SnakeGamePage(), context),
-                  child: const Text("FilledButton")),
+              FilledButton(onPressed: () => nextPage(WelcomePage(), context), child: const Text("FilledButton")),
               MaterialButton(
-                  onPressed: () => nextPage(SnakeGamePage(), context),
-                  child: const Text('Material Button'))
+                  onPressed: () => nextPage(WelcomePage(), context), child: const Text('Material Button'))
             ]),
           ],
         ),

@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import '../Database/GameScores.dart';
 import '../Database/globals.dart';
-import '../UI Design Folder/Functions.dart';
-import '../UI Design Folder/HomePage.dart';
+import '../FirebaseFunction/FirebaseFunction.dart';
+import '../Functions/Functions.dart';
+import '../UI Page/HomePage.dart';
 
 enum Direction { up, down, left, right }
 
@@ -56,7 +56,7 @@ class GamePageBoxedState extends State<GamePageBoxed> {
     setState(() {
       _shouldRunCallback = false;
     });
-    var hScore = GameScoresState().highestScore;
+    //var hScore = GameScoresState().highestScore;
     addScore(score);
     showDialog(
         context: context,
@@ -64,7 +64,8 @@ class GamePageBoxedState extends State<GamePageBoxed> {
           return AlertDialog(
               title: const Text("Game Over"),
               content: Text("Your Score is: $score\n"
-                  "Current highest score: $hScore"),
+                  //"Current highest score: $hScore"
+              ),
               actions: [
                 ElevatedButton(
                     onPressed: resetGame, child: const Text("Try Again")),

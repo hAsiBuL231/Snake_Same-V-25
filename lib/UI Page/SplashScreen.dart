@@ -1,61 +1,35 @@
-import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../Authentication/SignInPage.dart';
-import '../UI Design Folder/HomePage.dart';
+import '../FirebaseFunction/FirebaseFunction.dart';
+import '../Functions/Functions.dart';
 
-class WelcomePage extends StatefulWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<WelcomePage> createState() => _WelcomePageState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _WelcomePageState extends State<WelcomePage> {
-  int _progressValue = 0;
-  Timer? _timer;
-
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _startTimer();
+    _redirect();
   }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
+  Future<void> _redirect() async {
+    // await for for the widget to mount
+    await Future.delayed(const Duration(seconds: 2));
 
-  void _startTimer() {
-    const oneSec = Duration(seconds: 1);
-    _timer = Timer.periodic(
-      oneSec,
-      (Timer timer) {
-        setState(() {
-          if (_progressValue/10 == 1) {
-            timer.cancel();
-            _timer?.cancel();
-            User? user = FirebaseAuth.instance.currentUser;
-            if (user == null) {
-              print('User is currently signed out!');
-              //Navigator.of(context).pushAndRemoveUntil(const SignInPage() as Route<Object?>, (route) => false);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const SignInPage()));
-            } else {
-              print('User is logged in!');
-              //Navigator.of(context).pushAndRemoveUntil(const SignInPage() as Route<Object?>, (route) => false);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomePage()));
-            }
-          } else {
-            _progressValue += 2;
-          }
-        });
-      },
-    );
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print('\n User is currently signed out! \n\n');
+      newPage(const SignInPage(), context);
+    } else {
+      authentication(context);
+    }
   }
 
   @override
@@ -67,7 +41,7 @@ class _WelcomePageState extends State<WelcomePage> {
           Container(
               decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('images/cover.png'),
+                      image: AssetImage('Assets/cover.png'),
                       fit: BoxFit.fitHeight))),
           const Center(
             child: Column(
@@ -76,7 +50,7 @@ class _WelcomePageState extends State<WelcomePage> {
               children: [
                 SizedBox(height: 80),
                 Image(
-                    image: AssetImage('images/cover.png'),
+                    image: AssetImage('Assets/cover.png'),
                     height: 100,
                     width: 200),
                 SizedBox(height: 60),

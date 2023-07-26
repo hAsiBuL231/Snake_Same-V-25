@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snake_game_v_25/UI%20Design%20Folder/SnakeGamePage.dart';
+import 'package:snake_game_v_25/UI%20Page/WelcomePage.dart';
 
 import '../ChatApp/ChatPage.dart';
 import '../Database/UserProfile.dart';
@@ -21,14 +21,14 @@ class _HomePageState extends State<HomePage> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const ChatPage(),
-    const SnakeGamePage(),
+    const WelcomePage(),
     const UserProfile(),
   ];
   decoration() {
     if (_selectedIndex == 1) {
       return const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("Assets/background.png"), fit: BoxFit.cover));
+              image: AssetImage("Assets/background.png"), fit: BoxFit.fitHeight));
     } else {
       return const BoxDecoration(color: Colors.white);
     }

@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:snake_game_v_25/UI%20Design%20Folder/HomePage.dart';
-import '../Database/GameScores.dart';
+import 'package:snake_game_v_25/UI%20Page/HomePage.dart';
 import '../Database/globals.dart';
-import '../UI Design Folder/Functions.dart';
+import '../FirebaseFunction/FirebaseFunction.dart';
+import '../Functions/Functions.dart';
 
 enum Direction { up, down, left, right }
 
@@ -57,14 +57,15 @@ class GamePageOpenState extends State<GamePageOpen> {
       _shouldRunCallback = false;
     });
     addScore(score);
-    var hScore = GameScoresState().highestScore;
+    //var hScore = oldGameScoresState().highestScore;
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
               title: const Text("Game Over"),
               content: Text("Your Score is: $score\n"
-                  "Current highest score: $hScore"),
+                  //"Current highest score: $hScore"
+              ),
               actions: [
                 TextButton(
                     onPressed: resetGame, child: const Text("Try Again")),
