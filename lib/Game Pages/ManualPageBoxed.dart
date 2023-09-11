@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../Database/globals.dart';
-import '../FirebaseFunction/FirebaseFunction.dart';
-import '../Functions/Functions.dart';
+import '../All Functions Page/FirebaseFunction.dart';
+import '../All Functions Page/Functions.dart';
 import '../UI Page/HomePage.dart';
 
 enum Direction { up, down, left, right }

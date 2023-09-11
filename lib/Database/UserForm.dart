@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:snake_game_v_25/Functions/Functions.dart';
-import 'package:snake_game_v_25/Functions/GetImage.dart';
+import '../All Functions Page/Functions.dart';
+import 'package:snake_game_v_25/Database/GetImage.dart';
 import 'package:snake_game_v_25/UI%20Page/HomePage.dart';
 
 class UserForm extends StatefulWidget {
@@ -108,103 +108,120 @@ class UserFormState extends State<UserForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Personal Information'),
-        backgroundColor: Colors.blueAccent,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: formKey5,
-          child: Column(
-            children: [
-              //Image.asset('Assets/cover.png', height: 150.0),
-              const SizedBox(height: 16.0),
-              Container(
-                  decoration:
-                      ShapeDecoration(shape: CircleBorder(side: BorderSide(color: Colors.blue, width: 10))),
-                  child: CircleAvatar(radius: 80, backgroundImage: NetworkImage(imageURL!))),
-              TextButton(onPressed: () => nextPage(GetImage(), context), child: Text('Change Photo')),
-              const SizedBox(height: 10.0),
-              TextFormField(
-                  validator: (value) {
-                    if (value == '')
-                      return 'Please enter your Name!';
-                    else
-                      return null;
-                  },
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                      labelText: 'Name',
-                      hintText: '$userName',
-                      prefixIcon: const Icon(Icons.account_circle, color: Colors.blue))),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                  validator: (value) {
-                    if (value == '')
-                      return 'Please enter your Profession!';
-                    else
-                      return null;
-                  },
-                  controller: _professionController,
-                  decoration: const InputDecoration(
-                      labelText: 'Profession', prefixIcon: Icon(Icons.work, color: Colors.blue))),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                  validator: (value) {
-                    if (value!.length < 11 || int.tryParse(value) == null)
-                      return 'Please enter your number!';
-                    else
-                      return null;
-                  },
-                  controller: _phoneController,
-                  keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
-                      labelText: 'Phone', prefixIcon: Icon(Icons.phone, color: Colors.blue))),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                  validator: (value) {
-                    if (value == '')
-                      return 'Please enter a location!';
-                    else
-                      return null;
-                  },
-                  controller: _locationController,
-                  keyboardType: TextInputType.streetAddress,
-                  decoration: const InputDecoration(
-                      labelText: 'Location', prefixIcon: Icon(Icons.location_on, color: Colors.blue))),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                  validator: (value) {
-                    if (value == '')
-                      return 'Please enter your Date of Birth!';
-                    else
-                      return null;
-                  },
-                  controller: _dobController,
-                  keyboardType: TextInputType.datetime,
-                  decoration: const InputDecoration(
-                      labelText: 'Date of Birth', prefixIcon: Icon(Icons.date_range, color: Colors.blue))),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                  validator: (value) {
-                    if (value == '')
-                      return 'Please enter a language!';
-                    else
-                      return null;
-                  },
-                  controller: _languageController,
-                  keyboardType: TextInputType.multiline,
-                  decoration: const InputDecoration(
-                      labelText: 'Languages', prefixIcon: Icon(Icons.language, color: Colors.blue))),
-              const SizedBox(height: 32.0),
-              ElevatedButton(
-                  onPressed: _submitForm,
-                  child: const Text('Submit', style: TextStyle(fontSize: 28, color: Colors.white)))
-            ],
-          ),
+        appBar: AppBar(
+          title: const Text('Personal Information'),
+          backgroundColor: Colors.blueAccent,
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+                key: formKey5,
+                child: Column(children: [
+                  //Image.asset('Assets/cover.png', height: 150.0),
+                  const SizedBox(height: 16.0),
+                  Container(
+                      decoration:
+                          ShapeDecoration(shape: CircleBorder(side: BorderSide(color: Colors.blue, width: 10))),
+                      child: CircleAvatar(radius: 80, backgroundImage: NetworkImage(imageURL!))),
+                  TextButton(onPressed: () => nextPage(GetImage(), context), child: Text('Change Photo')),
+                  const SizedBox(height: 10.0),
+                  TextFormField(
+                      validator: (value) {
+                        if (value == '')
+                          return 'Please enter your Name!';
+                        else
+                          return null;
+                      },
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                          labelText: 'Name',
+                          hintText: '$userName',
+                          prefixIcon: const Icon(Icons.account_circle, color: Colors.blue))),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                      validator: (value) {
+                        if (value == '')
+                          return 'Please enter your Profession!';
+                        else
+                          return null;
+                      },
+                      controller: _professionController,
+                      decoration: const InputDecoration(
+                          labelText: 'Profession', prefixIcon: Icon(Icons.work, color: Colors.blue))),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                      validator: (value) {
+                        if (value!.length < 11 || int.tryParse(value) == null)
+                          return 'Please enter your number!';
+                        else
+                          return null;
+                      },
+                      controller: _phoneController,
+                      keyboardType: TextInputType.phone,
+                      decoration: const InputDecoration(
+                          labelText: 'Phone', prefixIcon: Icon(Icons.phone, color: Colors.blue))),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                      validator: (value) {
+                        if (value == '')
+                          return 'Please enter a location!';
+                        else
+                          return null;
+                      },
+                      controller: _locationController,
+                      keyboardType: TextInputType.streetAddress,
+                      decoration: const InputDecoration(
+                          labelText: 'Location', prefixIcon: Icon(Icons.location_on, color: Colors.blue))),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                      validator: (value) {
+                        if (value == '')
+                          return 'Please enter your Date of Birth!';
+                        else
+                          return null;
+                      },
+                      readOnly: true,
+                      controller: _dobController,
+                      //keyboardType: TextInputType.datetime,
+                      decoration: const InputDecoration(
+                          labelText: 'Date of Birth', prefixIcon: Icon(Icons.date_range, color: Colors.blue)),
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime(2000),
+                            firstDate: DateTime(1950),
+                            lastDate: DateTime.now());
+                        String formattedDate = '';
+                        if (pickedDate != null) {
+                          //String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                          formattedDate = DateFormat(pickedDate);
+                        }
+                        setState(() => _dobController.text = formattedDate);
+                      }),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                      validator: (value) {
+                        if (value == '')
+                          return 'Please enter a language!';
+                        else
+                          return null;
+                      },
+                      controller: _languageController,
+                      keyboardType: TextInputType.multiline,
+                      decoration: const InputDecoration(
+                          labelText: 'Languages', prefixIcon: Icon(Icons.language, color: Colors.blue))),
+                  const SizedBox(height: 32.0),
+                  ElevatedButton(
+                      onPressed: _submitForm,
+                      child: const Text('Submit', style: TextStyle(fontSize: 28, color: Colors.white)))
+                ]))));
   }
+}
+
+DateFormat(DateTime time) {
+  DateTime now = time;
+  //String convertedTime = "${now.hour.toString().padLeft(2, '0')}-${now.minute.toString().padLeft(2, '0')}";
+  String convertedDate =
+      "${now.year.toString()}/${now.month.toString().padLeft(2, '0')}/${now.day.toString().padLeft(2, '0')}";
+  return convertedDate;
 }

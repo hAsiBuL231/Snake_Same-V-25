@@ -8,7 +8,7 @@ import 'package:snake_game_v_25/Database/Leaderboard.dart';
 
 import '../ChatApp/UserChatDetailPage.dart';
 import '../Database/UserProfile.dart';
-import '../Functions/Functions.dart';
+import '../All Functions Page/Functions.dart';
 import 'GameSettings.dart';
 import 'InfoPage.dart';
 

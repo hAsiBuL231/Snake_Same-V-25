@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:snake_game_v_25/Database/UserForm.dart';
-import 'package:snake_game_v_25/Functions/Functions.dart';
+import '../All Functions Page/Functions.dart';
 import 'package:snake_game_v_25/UI%20Page/HomePage.dart';
 
 import '../Authentication/SignInPage.dart';

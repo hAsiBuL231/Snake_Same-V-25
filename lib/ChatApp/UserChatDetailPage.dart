@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:snake_game_v_25/FirebaseFunction/DeleteFunction.dart';
-import 'package:snake_game_v_25/FirebaseFunction/PhotoUpload.dart';
-import 'package:snake_game_v_25/Functions/Functions.dart';
+import 'package:snake_game_v_25/All Functions Page/DeleteFunction.dart';
+import 'package:snake_game_v_25/All Functions Page/PhotoUpload.dart';
+import '../All Functions Page/Functions.dart';
 
-import '../FirebaseFunction/FirebaseFunction.dart';
+import '../All Functions Page/FirebaseFunction.dart';
 
 class UserChatDetailPage extends StatefulWidget {
   final String imageUrl;

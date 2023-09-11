@@ -7,7 +7,7 @@ import '../Database/UserProfile.dart';
 import '../Authentication/ForgetPasswordPage.dart';
 import '../Authentication/SignInPage.dart';
 import '../Authentication/SignUpPage.dart';
-import '../Functions/Functions.dart';
+import '../All Functions Page/Functions.dart';
 import 'WelcomePage.dart';
 
 class AllPagesClass extends StatefulWidget {

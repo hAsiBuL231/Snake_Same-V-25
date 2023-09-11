@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 /*class Utility {
   //
   static const String KEY = "IMAGES_KEY";
@@ -40,3 +42,9 @@ import 'dart:convert';
     return base64Encode(data);
   }
 }*/
+
+local_storage() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  await preferences.setString('color', 'Red'); // store data
+  String? color = preferences.getString('color');  // get data
+}

@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:snake_game_v_25/Functions/Functions.dart';
+import '../All Functions Page/Functions.dart';
 
-import '../FirebaseFunction/FirebaseFunction.dart';
+import '../All Functions Page/FirebaseFunction.dart';
 import 'SignInPage.dart';
 
 class SignUpPage extends StatefulWidget {

@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:snake_game_v_25/Functions/GetImage.dart';
+import 'package:snake_game_v_25/Database/GetImage.dart';
 
 import '../Database/UserForm.dart';
 import '../Database/globals.dart';
-import '../Functions/Functions.dart';
+import 'Functions.dart';
 import '../UI Page/HomePage.dart';
 
 //String? userEmail = FirebaseAuth.instance.currentUser?.email;

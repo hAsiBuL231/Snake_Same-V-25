@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:snake_game_v_25/Database/Leaderboard.dart';
+import '../All Functions Page/Functions.dart';
 import '../Game%20Pages/ManualPageOpen.dart';
 import '../Game%20Pages/Tic_Tac_Game.dart';
 import '../Settings%20Folder/GameSettings.dart';
 import '../Settings%20Folder/InfoPage.dart';
-import '../Functions/Functions.dart';
 import '../Game Pages/GamePageBoxed.dart';
 import '../Game Pages/GamePageOpen.dart';
 import '../Game Pages/ManualPageBoxed.dart';

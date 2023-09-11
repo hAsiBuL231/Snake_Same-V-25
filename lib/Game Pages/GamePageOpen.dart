@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:snake_game_v_25/UI%20Page/HomePage.dart';
 import '../Database/globals.dart';
-import '../FirebaseFunction/FirebaseFunction.dart';
-import '../Functions/Functions.dart';
+import '../All Functions Page/FirebaseFunction.dart';
+import '../All Functions Page/Functions.dart';
 
 enum Direction { up, down, left, right }
 
@@ -65,13 +65,10 @@ class GamePageOpenState extends State<GamePageOpen> {
               title: const Text("Game Over"),
               content: Text("Your Score is: $score\n"
                   //"Current highest score: $hScore"
-              ),
+                  ),
               actions: [
-                TextButton(
-                    onPressed: resetGame, child: const Text("Try Again")),
-                TextButton(
-                    onPressed: () => nextPage(const HomePage(), context),
-                    child: const Text("Exit"))
+                TextButton(onPressed: resetGame, child: const Text("Try Again")),
+                TextButton(onPressed: () => nextPage(const HomePage(), context), child: const Text("Exit"))
               ]);
         });
   }
@@ -118,71 +115,65 @@ class GamePageOpenState extends State<GamePageOpen> {
     //int profileW = MediaQuery.of(context).size.width.toInt();
     startGame();
     return Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: Column(children: [
-              ElevatedButton.icon(
-                  style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.blue)),
-                  icon: const Icon(Icons.sports_score_outlined),
-                  label: Text("Score: $score",
-                      style: const TextStyle(color: Colors.black, fontSize: 18)),
-                  onPressed: null),
-              GestureDetector(
-                onVerticalDragUpdate: (details) {
-                  if (direction != Direction.up && details.delta.dy > 0) {
-                    direction = Direction.down;
-                  }
-                  if (direction != Direction.down && details.delta.dy < 0) {
-                    direction = Direction.up;
-                  }
-                },
-                onHorizontalDragUpdate: (details) {
-                  if (direction != Direction.left && details.delta.dx > 0) {
-                    direction = Direction.right;
-                  }
-                  if (direction != Direction.right && details.delta.dx < 0) {
-                    direction = Direction.left;
-                  }
-                },
-                child: Container(
-                    height: profileH.toDouble() - 80,
-                    color: Colors.black,
-                    child: GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.all(10),
-                        itemCount: grow * gColumn,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: grow,
-                          //mainAxisSpacing: 0.5,
-                          //crossAxisSpacing: 0.5,
-                        ),
-                        itemBuilder: (box, index) {
-                          if (snakePosition.last == index) {
-                            return Container(color: Colors.green[900]);
-                          } else if (snakePosition.first == index) {
-                            return Container(color: Colors.green[300]);
-                          } else if (snakePosition.contains(index)) {
-                            return Container(color: Colors.green);
-                          } else if (index == fruit) {
-                            return Container(
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image:
-                                            AssetImage('Assets/Images/egg.png'),
-                                        fit: BoxFit.fill),
-                                    shape: BoxShape.rectangle,
-                                    color: Colors.white));
-                          } else {
-                            return Container(color: Colors.white);
+            child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: Column(children: [
+                  ElevatedButton.icon(
+                      style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.blue)),
+                      icon: const Icon(Icons.sports_score_outlined),
+                      label: Text("Score: $score", style: const TextStyle(color: Colors.black, fontSize: 18)),
+                      onPressed: null),
+                  Expanded(
+                    child: GestureDetector(
+                        onVerticalDragUpdate: (details) {
+                          if (direction != Direction.up && details.delta.dy > 0) {
+                            direction = Direction.down;
                           }
-                        })),
-              ),
-            ]),
-          ),
-        ),
-        backgroundColor: Colors.blue[100]);
+                          if (direction != Direction.down && details.delta.dy < 0) {
+                            direction = Direction.up;
+                          }
+                        },
+                        onHorizontalDragUpdate: (details) {
+                          if (direction != Direction.left && details.delta.dx > 0) {
+                            direction = Direction.right;
+                          }
+                          if (direction != Direction.right && details.delta.dx < 0) {
+                            direction = Direction.left;
+                          }
+                        },
+                        child: Container(
+                            height: profileH.toDouble() - 80,
+                            color: Colors.black,
+                            child: GridView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: const EdgeInsets.all(10),
+                                itemCount: grow * gColumn,
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: grow,
+                                  //mainAxisSpacing: 0.5,
+                                  //crossAxisSpacing: 0.5,
+                                ),
+                                itemBuilder: (box, index) {
+                                  if (snakePosition.last == index) {
+                                    return Container(color: Colors.white);
+                                  } else if (snakePosition.first == index) {
+                                    return Container(color: Colors.white54);
+                                  } else if (snakePosition.contains(index)) {
+                                    return Container(color: Colors.white70);
+                                  } else if (index == fruit) {
+                                    return Container(
+                                        decoration: const BoxDecoration(
+                                            image: DecorationImage(
+                                                image: AssetImage('Assets/Images/egg.png'), fit: BoxFit.fill),
+                                            shape: BoxShape.rectangle,
+                                            color: Colors.black));
+                                  } else {
+                                    return Container(color: Colors.black);
+                                  }
+                                }))),
+                  )
+                ]))));
   }
 }

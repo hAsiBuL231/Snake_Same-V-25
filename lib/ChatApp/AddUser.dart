@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../Functions/Functions.dart';
+import '../All Functions Page/Functions.dart';
 import 'UserChatDetailPage.dart';
 
 class AddUser extends StatefulWidget {
