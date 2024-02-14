@@ -9,10 +9,8 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //try {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseAppCheck.instance.activate(
-      webRecaptchaSiteKey: 'recaptcha-v3-site-key',
-      androidProvider: AndroidProvider.playIntegrity,
-      appleProvider: AppleProvider.appAttest);
+  //await FirebaseAppCheck.instance.activate(
+  //    webProvider: ReCaptchaEnterpriseProvider('recaptcha-v3-site-key'), androidProvider: AndroidProvider.playIntegrity, appleProvider: AppleProvider.appAttest);
   /*} catch (e) {
     if (kDebugMode) {
       print('\n\nPrinting From App: \n Error during Firebase initialization: $e\n\n');
@@ -37,6 +35,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-

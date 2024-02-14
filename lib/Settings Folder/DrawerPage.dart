@@ -26,19 +26,14 @@ class DrawerPage extends StatelessWidget {
       Flexible(
           child: ListView(children: <Widget>[
         UserAccountsDrawerHeader(
-          decoration: const BoxDecoration(
-              image: DecorationImage(image: AssetImage('Assets/cover.png'), fit: BoxFit.cover)),
-          accountName: Text(userName ?? 'No Data',
-              style: const TextStyle(
-                  color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold, backgroundColor: Colors.white)),
-          accountEmail: Text(userEmail ?? 'No Data',
-              style: const TextStyle(
-                  color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold, backgroundColor: Colors.white)),
+          decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('Assets/cover.png'), fit: BoxFit.cover)),
+          accountName: Text(userName ?? 'No Data', style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold, backgroundColor: Colors.white)),
+          accountEmail:
+              Text(userEmail ?? 'No Data', style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold, backgroundColor: Colors.white)),
           currentAccountPicture: //"$userImage",
               CachedNetworkImage(
             imageUrl: '$userImage',
-            imageBuilder: (context, imageProvider) =>
-                CircleAvatar(backgroundImage: imageProvider, backgroundColor: Colors.blue),
+            imageBuilder: (context, imageProvider) => CircleAvatar(backgroundImage: imageProvider, backgroundColor: Colors.blue),
             placeholder: (context, url) => CircularProgressIndicator(),
             errorWidget: (context, url, error) => Icon(Icons.error),
           ),
@@ -78,10 +73,7 @@ class DrawerPage extends StatelessWidget {
           textColor: Colors.blue,
           leading: Icon(Icons.feedback_outlined),
           title: Text("Feedback"),
-          onTap: () => nextPage(
-              UserChatDetailPage(
-                  email: 'hossainhasibul2@gmail.com', imageUrl: 'gs://project1-be966.appspot.com/profile.jpg'),
-              context),
+          onTap: () => nextPage(UserChatDetailPage(email: 'hossainhasibul2@gmail.com', imageUrl: 'gs://project1-be966.appspot.com/profile.jpg'), context),
         ),
         ListTile(
             splashColor: Colors.amber,
@@ -108,11 +100,7 @@ class DrawerPage extends StatelessWidget {
             title: const Text('Exit'),
             onTap: () => SystemChannels.platform.invokeMethod('SystemNavigator.pop')),
         SizedBox(height: 15),
-        Center(
-            child: Hero(
-                tag: 'footer',
-                child: Text('Made with ♥ by MD. Hasibul Hossain',
-                    style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w700))))
+        Center(child: Hero(tag: 'footer', child: Text('Made with ♥ by MD. Hasibul Hossain', style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w700))))
       ]))
     ]));
   }
